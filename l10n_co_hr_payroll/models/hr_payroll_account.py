@@ -25,7 +25,7 @@ from datetime import date, datetime, timedelta
 import logging
 _logger = logging.getLogger(__name__)
 from openerp.osv import fields, osv
-from openerp.tools import config, float_compare
+from openerp.tools import config, float_compare, float_is_zero
 from openerp.tools.translate import _
 
 class hr_salary_rule(osv.osv):
