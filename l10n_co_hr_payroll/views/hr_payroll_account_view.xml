@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+    <!-- Agregando campos que permiten definir el tercero para el registro contable de la regla salarial -->
+
+        <record id="hr_salary_rule_co_form_inherit" model="ir.ui.view">
+            <field name="name">Reglas salariales - Colombia</field>
+            <field name="model">hr.salary.rule</field>
+            <field name="inherit_id" ref="hr_payroll_account.hr_salary_rule_form_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='account_tax_id']" position="before">
+                    <field name="origin_partner" help="Permite definir de dónde será tomado el tercero para el registro contable"/>
+                    <field name="partner_id" help="Tercero para el registro contable, cuando se ha seleccionado Tipo de tercero: 'Regla Salarial'"
+                    attrs="{'invisible': [('origin_partner','!=','rule')], 'required':[('origin_partner','=','rule')]}"/>
+                </xpath>
+                <xpath expr="//field[@name='analytic_account_id']" position="before">
+                    <field name="origin_analytic_account" help="Permite definir de dónde será tomada la cuenta analitica para el registro contable
+                    	" groups="analytic.group_analytic_accounting"/>
+                </xpath>
+                <xpath expr="//field[@name='analytic_account_id']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('origin_analytic_account','!=','rule')], 'required':[('origin_analytic_account','=','rule')]}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>
